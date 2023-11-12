@@ -1,25 +1,29 @@
 {
   "name": "lost-and-found-backend",
   "version": "1.0.0",
-  "description": "Learning mern while creating this app",
-  "main": "server.js",
+  "description": "Learning MERN stack while creating this app",
+  "main": "server.js", // Entry point for your application
   "scripts": {
-    "start": "node server.js",
+    "start": "node server.js", // Command to start your server in production
+    "dev": "nodemon server.js", // Command to start your server with nodemon for development
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Pranav Prashant",
   "license": "ISC",
+  "engines": {
+    "node": "14.70.0" // Specify the Node.js version (adjust as needed)
+  },
   "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "cookie-parser": "^1.4.6",
-    "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2",
-    "express-validator": "^7.0.1",
-    "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.0.0"
+    "bcryptjs": "^2.4.3", // Library for hashing passwords
+    "cookie-parser": "^1.4.6", // Middleware for parsing cookies
+    "cors": "^2.8.5", // Middleware for enabling CORS
+    "dotenv": "^16.3.1", // Library for loading environment variables from a .env file
+    "express": "^4.18.2", // Web framework for Node.js
+    "express-validator": "^7.0.1", // Validator middleware for Express.js
+    "jsonwebtoken": "^9.0.2", // Library for creating JSON Web Tokens
+    "mongoose": "^8.0.0" // MongoDB object modeling for Node.js
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1" // Utility to monitor changes and automatically restart the server during development
   }
 }
