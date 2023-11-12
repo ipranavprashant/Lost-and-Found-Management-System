@@ -11,7 +11,7 @@
   "author": "Pranav Prashant",
   "license": "ISC",
   "engines": {
-    "node": "14.70.0" // Specify the Node.js version (adjust as needed)
+    "node": "14.x" // Specify the Node.js version (adjust as needed)
   },
   "dependencies": {
     "bcryptjs": "^2.4.3", // Library for hashing passwords
