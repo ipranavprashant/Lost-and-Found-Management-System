@@ -70,6 +70,11 @@ const fetchItemPersonal = async (req, res) => {
 
 const createItem = async (req, res) => {
     try {
+        // Check if user is authenticated
+        if (!req.user || !req.user._id) {
+            return res.status(401).json({ error: "Unauthorized" });
+        }
+
         // get the send-in data off request body
         const itemname = req.body.itemname;
         const itemdescription = req.body.itemdescription;
@@ -80,7 +85,7 @@ const createItem = async (req, res) => {
             itemname: itemname,
             itemdescription: itemdescription,
             concerntype: concerntype,
-            user:req.user._id
+            user: req.user._id
         });
 
         // respond with the new note
@@ -91,6 +96,7 @@ const createItem = async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 }
+
 
 const updateItem = async (req, res) => {
     try {
