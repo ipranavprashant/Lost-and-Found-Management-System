@@ -14,6 +14,20 @@ const fetchItems = async (req, res) => {
     }
 }
 
+const fetchItemsPersonal = async (req, res) => {
+    try {
+        // find the notes
+        const item = await Item.find({user:req.user._id});
+
+        // respond with them
+        res.json({ gotItem: item });
+    } catch (error) {
+        // Handle errors here
+        console.error("Error during fetchItems:", error);
+        res.status(500).send("Internal Server Error");
+    }
+}
+
 const fetchItem = async (req, res) => {
     try {
         // get id off the url
@@ -21,6 +35,23 @@ const fetchItem = async (req, res) => {
 
         // find the notes using that id
         const item = await Item.findById(itemId);
+
+        // respond with them
+        res.json({ gotItem: item });
+    } catch (error) {
+        // Handle errors here
+        console.error("Error during fetchItem:", error);
+        res.status(500).send("Internal Server Error");
+    }
+}
+
+const fetchItemPersonal = async (req, res) => {
+    try {
+        // get id off the url
+        const itemId = req.params.id;
+
+        // find the notes using that id
+        const item = await Item.findOne({_id:itemId,user:req.user._id});
 
         // respond with them
         res.json({ gotItem: item });
@@ -42,7 +73,8 @@ const createItem = async (req, res) => {
         const createdItem = await Item.create({
             itemname: itemname,
             itemdescription: itemdescription,
-            concerntype: concerntype
+            concerntype: concerntype,
+            user:req.user._id
         });
 
         // respond with the new note
@@ -65,7 +97,7 @@ const updateItem = async (req, res) => {
         const concerntype = req.body.concerntype;
 
         // find and update the record
-        const deprecatedItem = await Item.findByIdAndUpdate(itemId, {
+        const deprecatedItem = await Item.findOne({_id:itemId,user:req.user._id}, {
             itemname: itemname,
             itemdescription: itemdescription,
             itemconcerntype: concerntype
@@ -91,7 +123,7 @@ const deleteItem = async (req, res) => {
         const itemId = req.params.id;
 
         // delete the record
-        await Item.deleteOne({ _id: itemId })
+        await Item.deleteOne({ _id: itemId, user:req.user._id })
 
         // respond with the deleted item
         res.json({ success: "Item Deleted" });
@@ -105,6 +137,8 @@ const deleteItem = async (req, res) => {
 module.exports = {
     fetchItem: fetchItem,
     fetchItems: fetchItems,
+    fetchItemsPersonal:fetchItemsPersonal,
+    fetchItemPersonal:fetchItemPersonal,
     createItem: createItem,
     updateItem: updateItem,
     deleteItem: deleteItem
