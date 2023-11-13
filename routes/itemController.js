@@ -16,17 +16,23 @@ const fetchItems = async (req, res) => {
 
 const fetchItemsPersonal = async (req, res) => {
     try {
-        // find the notes
-        const item = await Item.find({user:req.user._id});
+        // Check if user is authenticated
+        if (!req.user) {
+            return res.status(401).json({ error: "Unauthorized" });
+        }
+
+        // find the items for the authenticated user
+        const items = await Item.find({ user: req.user._id });
 
         // respond with them
-        res.json({ gotItem: item });
+        res.json({ gotItems: items });
     } catch (error) {
         // Handle errors here
-        console.error("Error during fetchItems:", error);
+        console.error("Error during fetchItemsPersonal:", error);
         res.status(500).send("Internal Server Error");
     }
 }
+
 
 const fetchItem = async (req, res) => {
     try {
