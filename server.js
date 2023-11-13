@@ -30,26 +30,26 @@ connectToMongo();
 app.post("/signup", userController.signup); 
 app.post("/login", userController.login); 
 app.get("/logout", userController.logout);
-app.get("/check-auth",requireAuth,userController.checkAuth);
+app.get("/check-auth",userController.checkAuth);
 
-app.post("/item", requireAuth, itemController.createItem); 
-app.get("/item",  requireAuth, itemController.fetchItems);
-app.get("/item/personal",  requireAuth, itemController.fetchItemsPersonal);
-app.get("/item/:id", requireAuth,  itemController.fetchItem);
-app.put("/item/:id",  requireAuth, itemController.updateItem);
-app.delete("/item/:id",  requireAuth, itemController.deleteItem);
+app.post("/item",  itemController.createItem); 
+app.get("/item",   itemController.fetchItems);
+app.get("/item/personal",   itemController.fetchItemsPersonal);
+app.get("/item/:id",   itemController.fetchItem);
+app.put("/item/:id",   itemController.updateItem);
+app.delete("/item/:id",   itemController.deleteItem);
 
-app.post("/claimant", requireAuth, claimantController.createClaimant);
-app.get("/claimant", requireAuth, claimantController.fetchClaimants);
-app.get("/claimant/:id", requireAuth, claimantController.fetchClaimant);
-app.put("/claimant/:id", requireAuth, claimantController.updateClaimant);
-app.delete("/claimant/:id", requireAuth, claimantController.deleteClaimant);
+app.post("/claimant",  claimantController.createClaimant);
+app.get("/claimant",  claimantController.fetchClaimants);
+app.get("/claimant/:id",  claimantController.fetchClaimant);
+app.put("/claimant/:id",  claimantController.updateClaimant);
+app.delete("/claimant/:id",  claimantController.deleteClaimant);
 
-app.post("/helper", requireAuth, helperController.createHelper);
-app.get("/helper", requireAuth, helperController.fetchHelpers);
-app.get("/helper/:id", requireAuth, helperController.fetchHelper);
-app.put("/helper/:id", requireAuth, helperController.updateHelper);
-app.delete("/helper/:id", requireAuth, helperController.deleteHelper);
+app.post("/helper",  helperController.createHelper);
+app.get("/helper",  helperController.fetchHelpers);
+app.get("/helper/:id",  helperController.fetchHelper);
+app.put("/helper/:id",  helperController.updateHelper);
+app.delete("/helper/:id",  helperController.deleteHelper);
 
 //start our server
 app.listen(process.env.PORT);
