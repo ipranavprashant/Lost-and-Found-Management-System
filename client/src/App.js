@@ -11,12 +11,12 @@ import ClaimantList from './components/ClaimantList';
 import PersonalItems from './components/PersonalItems';
 
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('authToken'));
+  // const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('authToken'));
 
-  useEffect(() => {
-    // Update authentication status when 'authToken' changes in localStorage
-    setIsAuthenticated(!!localStorage.getItem('authToken'));
-  }, []);
+  // useEffect(() => {
+  //   // Update authentication status when 'authToken' changes in localStorage
+  //   setIsAuthenticated(!!localStorage.getItem('authToken'));
+  // }, []);
 
   return (
     <>

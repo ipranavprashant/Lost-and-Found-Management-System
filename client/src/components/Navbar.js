@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const isAuthenticated = localStorage.getItem('authToken');
+
 
   const handleToggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -44,7 +46,7 @@ const Navbar = () => {
 
   const linkContainerStyle = {
     display: !isSmallScreen ? 'flex' : 'none',
-    justifyContent:'center',
+    justifyContent: 'center',
   };
 
   const linkStyle = {
@@ -60,7 +62,7 @@ const Navbar = () => {
   const iconStyle = {
     cursor: 'pointer',
     display: isSmallScreen ? 'block' : 'none',
-    marginTop:'15px'
+    marginTop: '15px'
   };
 
   const menuStyle = {
@@ -133,18 +135,18 @@ const Navbar = () => {
         </Link>
         {isAuthenticated && (
           <>
-          <Link to="/my-items" style={linkStyle}>
-                My Items
-              </Link>
-              <Link to="/all-items" style={linkStyle}>
-                All Items
-              </Link>
-              <Link to="/all-items/lost" style={linkStyle}>
-                Lost
-              </Link>
-              <Link to="/all-items/found" style={linkStyle}>
-                Found
-              </Link>
+            <Link to="/my-items" style={linkStyle}>
+              My Items
+            </Link>
+            <Link to="/all-items" style={linkStyle}>
+              All Items
+            </Link>
+            <Link to="/all-items/lost" style={linkStyle}>
+              Lost
+            </Link>
+            <Link to="/all-items/found" style={linkStyle}>
+              Found
+            </Link>
             <Link to="/raise-a-concern" style={linkStyle}>
               Raise a concern
             </Link>

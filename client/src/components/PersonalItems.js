@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from './Navbar';
-import LostFoundItems from './LostFoundItems';
-// const Base_URL="https://lostandfoundbackend-y9qs.onrender.com";
-const Base_URL="http://localhost:5000";
+import DisplayPersonalItems from './DisplayPersonalItems';
+const Base_URL = "https://lostandfoundbackend-y9qs.onrender.com";
+// const Base_URL = "http://localhost:5000";
+
 const PersonalItems = (props) => {
   const [items, setItems] = useState([]);
 
@@ -13,23 +14,28 @@ const PersonalItems = (props) => {
 
   const fetchItems = async () => {
     try {
-      const res = await axios.get(`${Base_URL}/personalitem`);
-      console.log(res);
-      setItems(res.data.gotItem);
+      const token = localStorage.getItem('authToken');
+      const config = token
+        ? { headers: { Authorization: `Bearer ${token}` }, withCredentials: true }
+        : { withCredentials: true };
+
+      const res = await axios.get(`${Base_URL}/personalitem/`, config);
+
+      setItems(res.data.gotItems);
     } catch (error) {
       console.error('Error fetching items:', error);
     }
-  }
+  };
 
   const renderItem = (item) => {
-      return <LostFoundItems key={item._id} item={item} />;
-  }
+    return <DisplayPersonalItems key={item._id} item={item} />;
+  };
 
   return (
     <>
       <Navbar />
       <div>
-        <h1>Items {props.req}:</h1>
+        <h1>My Items {props.req}:</h1>
         <h3>*If your items ain't visible, make sure you raise a concern before.*</h3>
         {items.length === 0 ? (
           <p>No lost or found items found</p>

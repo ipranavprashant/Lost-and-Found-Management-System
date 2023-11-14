@@ -2,11 +2,6 @@ const Item = require("../models/PersonalItem");
 
 const fetchItemsPersonal = async (req, res) => {
     try {
-        // Check if user is authenticated
-        if (!req.user) {
-            return res.status(401).json({ error: "Unauthorized" });
-        }
-
         // find the items for the authenticated user
         const items = await Item.find({ user: req.user._id });
 
@@ -19,14 +14,13 @@ const fetchItemsPersonal = async (req, res) => {
     }
 }
 
-
 const fetchItemPersonal = async (req, res) => {
     try {
         // get id off the url
         const itemId = req.params.id;
 
         // find the notes using that id
-        const item = await Item.findOne({_id:itemId,user:req.user._id});
+        const item = await Item.findOne({ _id: itemId, user: req.user._id });
 
         // respond with them
         res.json({ gotItem: item });
@@ -41,17 +35,15 @@ const createItemPersonal = async (req, res) => {
     const itemname = req.body.itemname;
     const itemdescription = req.body.itemdescription;
     const concerntype = req.body.concerntype;
-    
-    const item=await Item.create({
-        itemname:itemname,
-        itemdescription:itemdescription,
-        concerntype:concerntype,
-        user:req.user._id
+
+    const item = await Item.create({
+        itemname: itemname,
+        itemdescription: itemdescription,
+        concerntype: concerntype,
+        user: req.user._id
     })
-    res.json({item:item});
+    res.json({ item: item });
 }
-
-
 
 const updateItemPersonal = async (req, res) => {
     try {
@@ -64,7 +56,7 @@ const updateItemPersonal = async (req, res) => {
         const concerntype = req.body.concerntype;
 
         // find and update the record
-        const deprecatedItem = await Item.findOneAndUpdate({_id:itemId,user:req.user._id}, {
+        const deprecatedItem = await Item.findOneAndUpdate({ _id: itemId, user: req.user._id }, {
             itemname: itemname,
             itemdescription: itemdescription,
             itemconcerntype: concerntype
@@ -90,7 +82,7 @@ const deleteItemPersonal = async (req, res) => {
         const itemId = req.params.id;
 
         // delete the record
-        await Item.deleteOne({ _id: itemId, user:req.user._id })
+        await Item.deleteOne({ _id: itemId, user: req.user._id })
 
         // respond with the deleted item
         res.json({ success: "Item Deleted" });
@@ -102,8 +94,8 @@ const deleteItemPersonal = async (req, res) => {
 }
 
 module.exports = {
-    fetchItemsPersonal:fetchItemsPersonal,
-    fetchItemPersonal:fetchItemPersonal,
+    fetchItemsPersonal: fetchItemsPersonal,
+    fetchItemPersonal: fetchItemPersonal,
     createItemPersonal: createItemPersonal,
     updateItemPersonal: updateItemPersonal,
     deleteItemPersonal: deleteItemPersonal

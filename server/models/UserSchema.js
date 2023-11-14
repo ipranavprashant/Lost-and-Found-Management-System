@@ -1,30 +1,30 @@
 const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
-    username:{
-        type:String,
-        required:true,
-        minlength:3
+    username: {
+        type: String,
+        required: true,
+        minlength: 3
     },
-    email:{
-        type:String,
-        required:true,
-        unique:[true,"The entered Email ID is already registered"]
+    email: {
+        type: String,
+        required: true,
+        unique: [true, "The entered Email ID is already registered"]
     },
-    password:{
-        type:String,
-        require:true
+    password: {
+        type: String,
+        require: true
     },
-    date:{
-        type:Date,
-        default:Date.now()
+    date: {
+        type: Date,
+        default: Date.now()
     },
-    item:[
+    item: [
         {
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"PersonalItem"
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "PersonalItem"
         }
     ]
 });
 
-module.exports=new mongoose.model("User",UserSchema);
+module.exports = new mongoose.model("User", UserSchema);

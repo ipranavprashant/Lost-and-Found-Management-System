@@ -90,8 +90,8 @@ const checkAuth = (req, res) => {
 
 
 module.exports = {
-    signup: signup,
-    login: login,
-    logout: logout,
-    checkAuth: checkAuth
+  signup: signup,
+  login: login,
+  logout: logout,
+  checkAuth: checkAuth
 }

@@ -34,7 +34,7 @@ const createHelper = async (req, res) => {
             helpername: helpername,
             mobilenumber: mobilenumber,
             hostelname: hostelname,
-            itemdetails:itemdetails
+            itemdetails: itemdetails
         });
 
         // respond with the new note
@@ -62,7 +62,7 @@ const updateHelper = async (req, res) => {
             helpername: helpername,
             mobilenumber: mobilenumber,
             helperhostelname: hostelname,
-            itemdetails:itemdetails
+            itemdetails: itemdetails
 
         })
 

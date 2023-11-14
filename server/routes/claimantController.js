@@ -24,7 +24,7 @@ const fetchClaimant = async (req, res) => {
 const createClaimant = async (req, res) => {
     try {
         // get the send-in data off request body
-        const claimantname = req.body.claimantname;
+        const claimantname = req.body.claimantname;S
         const mobilenumber = req.body.mobilenumber;
         const hostelname = req.body.hostelname;
         const proofofclaim = req.body.proofofclaim;
@@ -36,8 +36,8 @@ const createClaimant = async (req, res) => {
             claimantname: claimantname,
             mobilenumber: mobilenumber,
             hostelname: hostelname,
-            proofofclaim:proofofclaim,
-            itemdetails:itemdetails
+            proofofclaim: proofofclaim,
+            itemdetails: itemdetails
         });
 
         // respond with the new note
@@ -67,10 +67,10 @@ const updateClaimant = async (req, res) => {
             claimantname: claimantname,
             mobilenumber: mobilenumber,
             claimanthostelname: hostelname,
-            proofofclaim :proofofclaim,
-            itemdetails:itemdetails
+            proofofclaim: proofofclaim,
+            itemdetails: itemdetails
 
-            
+
         })
 
         const updatedClaimant = await Claimant.findById(claimantId);

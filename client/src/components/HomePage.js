@@ -53,14 +53,14 @@ const HomePage = () => {
             </Link>
           </>
         ) : <>
-            <p style={paragraphStyle}>You can proceed to raising a concern</p>
-            <Link to="/raise-a-concern">
-              <button className="sign-in-button" style={buttonStyle}>
-                Raise
-              </button>
-            </Link>
-          </>
-          }
+          <p style={paragraphStyle}>You can proceed to raising a concern</p>
+          <Link to="/raise-a-concern">
+            <button className="sign-in-button" style={buttonStyle}>
+              Raise
+            </button>
+          </Link>
+        </>
+        }
         <div style={membersStyle}>
           <GroupInfo /> {/* Display the GroupInfo component here */}
         </div>

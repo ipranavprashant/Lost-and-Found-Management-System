@@ -8,11 +8,11 @@ const requireAuth = async (req, res, next) => {
 
         // decode the token
         const decodedToken = jwt.verify(token, process.env.SECRETKEY);
-        console.log(token);
-        console.log(decodedToken);
+        // console.log(token);
+        // console.log(decodedToken);
 
         //check expiration of token
-        if(Date.now()>decodedToken.expirationTime){
+        if (Date.now() > decodedToken.expirationTime) {
             return res.sendStatus(401);
         }
         // find user using decoded sub
