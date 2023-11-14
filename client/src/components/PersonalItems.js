@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from './Navbar';
 import DisplayPersonalItems from './DisplayPersonalItems';
-const Base_URL = "https://lostandfoundbackend-y9qs.onrender.com";
-// const Base_URL = "http://localhost:5000";
+// const Base_URL = "https://lostandfoundbackend-y9qs.onrender.com";
+const Base_URL = "http://localhost:5000";
 
 const PersonalItems = (props) => {
   const [items, setItems] = useState([]);
@@ -13,19 +13,26 @@ const PersonalItems = (props) => {
   }, []);
 
   const fetchItems = async () => {
-    try {
-      const token = localStorage.getItem('authToken');
-      const config = token
-        ? { headers: { Authorization: `Bearer ${token}` }, withCredentials: true }
-        : { withCredentials: true };
-
-      const res = await axios.get(`${Base_URL}/personalitem/`, config);
-
-      setItems(res.data.gotItems);
-    } catch (error) {
-      console.error('Error fetching items:', error);
+  try {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      console.error('No authentication token found.');
+      return;
     }
-  };
+
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+      withCredentials: true,
+    };
+
+    const res = await axios.get(`${Base_URL}/personalitem`, config);
+
+    setItems(res.data.gotItems);
+  } catch (error) {
+    console.error('Error fetching items:', error);
+  }
+};
+
 
   const renderItem = (item) => {
     return <DisplayPersonalItems key={item._id} item={item} />;
