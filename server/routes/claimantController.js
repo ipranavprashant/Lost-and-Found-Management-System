@@ -24,7 +24,7 @@ const fetchClaimant = async (req, res) => {
 const createClaimant = async (req, res) => {
     try {
         // get the send-in data off request body
-        const claimantname = req.body.claimantname;S
+        const claimantname = req.body.claimantname;
         const mobilenumber = req.body.mobilenumber;
         const hostelname = req.body.hostelname;
         const proofofclaim = req.body.proofofclaim;

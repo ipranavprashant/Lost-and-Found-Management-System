@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from "axios";
-const Base_URL = "https://lostandfoundbackend-y9qs.onrender.com";
-// const Base_URL = "http://localhost:5000";
+// const Base_URL = "https://lostandfoundbackend-y9qs.onrender.com";
+const Base_URL = "http://localhost:5000";
 
 const LostItems = (props) => {
   const { item } = props;
@@ -76,7 +76,7 @@ const LostItems = (props) => {
       itemdetails: `${item.itemname} - ${item.itemdescription}`,
     };
 
-    const res = await axios.post(`${Base_URL}/helper`, data);
+    await axios.post(`${Base_URL}/helper`, data);
     alert("Thank you for contributing to the growth of our community. We are temporarily taking this item off the portal, with the hope that your assistance may aid in returning it to its original owner.");
     await axios.delete(`${Base_URL}/item/${_id}`);
     closeModal();
@@ -98,7 +98,7 @@ const LostItems = (props) => {
         itemdetails: `${item.itemname} - ${item.itemdescription} (Claimed)`,
       };
 
-      const res = await axios.post(`${Base_URL}/claimant`, data);
+      await axios.post(`${Base_URL}/claimant`, data);
       alert("The item has been successfully claimed. Please ensure that you have not claimed someone else's item. If you have mistakenly done so, kindly resubmit it using the \"found\" option.");
       await axios.delete(`${Base_URL}/item/${_id}`);
       closeModal();

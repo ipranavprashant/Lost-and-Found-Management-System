@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from "axios";
+const Base_URL = "https://lostandfoundbackend-y9qs.onrender.com";
+// const Base_URL = "http://localhost:5000";
 
 const LostItems = (props) => {
   const { item } = props;
@@ -53,11 +55,6 @@ const LostItems = (props) => {
   };
 
   const handleHelp = () => {
-
-    setIsModalOpen(true);
-  };
-
-  const handleClaim = async () => {
     setIsModalOpen(true);
   };
 
@@ -71,39 +68,14 @@ const LostItems = (props) => {
       helpername: userName,
       mobilenumber: userMobile,
       hostelname: userHostel,
-      itemdetails: `${item.itemname} - ${item.itemdescription} (Helped find)`,
+      itemdetails: `${item.itemname} - ${item.itemdescription}`,
     };
 
-    const res = await axios.post("https://lostandfoundbackend-y9qs.onrender.com/helper", data);
+    await axios.post(`${Base_URL}/helper`, data);
     alert("Thank you for contributing to the growth of our community. We are temporarily taking this item off the portal, with the hope that your assistance may aid in returning it to its original owner.");
-    await axios.delete(`https://lostandfoundbackend-y9qs.onrender.com/item/${_id}`);
+    await axios.delete(`${Base_URL}/helper/${_id}`);
     closeModal();
     alert("Item has been successfully removed!");
-  };
-
-  const handleSubmitClaim = async (_id) => {
-    if (item._id) {
-      if (!proofOfClaim) {
-        alert("Please provide proof of claim.");
-        return;
-      }
-      // Create a data object to send to the backend
-      const data = {
-        claimantname: userName,
-        mobilenumber: userMobile,
-        hostelname: userHostel,
-        proofofclaim: proofOfClaim,
-        itemdetails: `${item.itemname} - ${item.itemdescription} (Claimed)`,
-      };
-
-      const res = await axios.post("https://lostandfoundbackend-y9qs.onrender.com/claimant", data);
-      alert("The item has been successfully claimed. Please ensure that you have not claimed someone else's item. If you have mistakenly done so, kindly resubmit it using the \"found\" option.");
-      await axios.delete(`https://lostandfoundbackend-y9qs.onrender.com/item/${_id}`);
-      closeModal();
-      alert("Item has been successfully removed!");
-    } else {
-      console.error("Item doesn't have a valid _id");
-    }
   };
 
   if (item.concerntype !== 'lost') {
@@ -118,8 +90,8 @@ const LostItems = (props) => {
         <p>This item has been <b>{item.concerntype}</b></p>
       </div>
       <div>
-        <button onClick={item.concerntype === 'lost' ? handleHelp : handleClaim} style={btnStyle}>
-          {item.concerntype === 'lost' ? 'Help' : 'Claim'}
+        <button onClick={handleHelp} style={btnStyle}>
+          Help
         </button>
       </div>
 
@@ -135,8 +107,8 @@ const LostItems = (props) => {
             {item.concerntype === 'found' && (
               <input type="text" placeholder="Proof of Claim" style={inputStyle} value={proofOfClaim} onChange={(e) => setProofOfClaim(e.target.value)} />
             )}
-            <button onClick={item.concerntype === 'lost' ? () => handleSubmitHelp(item._id) : () => handleSubmitClaim(item._id)} style={btnStyleSubmit}>
-              {item.concerntype === 'lost' ? 'Submit Help' : 'Submit Claim'}
+            <button onClick={handleSubmitHelp(item._id)} style={btnStyleSubmit}>
+              Submit Help
             </button>
           </div>
         </div>
