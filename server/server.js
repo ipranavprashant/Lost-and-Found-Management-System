@@ -38,7 +38,7 @@ app.get("/check-auth", requireAuth, userController.checkAuth);
 
 app.post("/item",requireAuth, itemController.createItem);
 app.get("/item/user/", requireAuth, itemController.fetchUserSpecificItems);
-app.get("/item/", requireAuth, itemController.fetchItems);
+app.get("/item/", itemController.fetchItems);
 app.get("/item/:id", itemController.fetchItem);
 app.put("/item/:id", itemController.updateItem);
 app.delete("/item/:id", itemController.deleteItem);
