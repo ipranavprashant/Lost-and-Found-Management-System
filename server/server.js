@@ -36,7 +36,7 @@ app.get("/logout", userController.logout);
 app.get("/fetchuser/:id",requireAuth, userController.fetchUser);
 app.get("/check-auth", requireAuth, userController.checkAuth);
 
-app.post("/item",requireAuth, itemController.createItem);
+app.post("/item", itemController.createItem);
 app.get("/item/user/:id", itemController.fetchUserSpecificItems);
 app.get("/item/", itemController.fetchItems);
 app.get("/item/:id", itemController.fetchItem);
