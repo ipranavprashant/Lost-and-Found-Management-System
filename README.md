@@ -66,5 +66,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Special thanks to the MERN stack community for their valuable contributions and resources.
 
 ```
-
-Make sure to replace placeholders such as `your-username`, `your-mern-app`, and update the license information accordingly. Additionally, you can include more details about the application's features, usage, and any other relevant information for users and contributors.
