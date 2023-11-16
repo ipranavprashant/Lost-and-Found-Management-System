@@ -3,19 +3,24 @@ import './Signup.css';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import axios from 'axios';
-const Base_URL="https://lostandfoundbackend-y9qs.onrender.com";
-// const Base_URL = "http://localhost:5000";
+// const Base_URL = "https://lostandfoundbackend-y9qs.onrender.com";
+const Base_URL = "http://localhost:5000";
 
 function Signup() {
   const navigate = useNavigate();
 
   const [name, setName] = useState('');
+  const [rollno, setRollNo] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const handleNameChange = (e) => {
     setName(e.target.value);
+  };
+
+  const handleRollNoChange = (e) => {
+    setRollNo(e.target.value);
   };
 
   const handleEmailChange = (e) => {
@@ -41,6 +46,7 @@ function Signup() {
 
     const data = {
       username: name,
+      rollno: rollno,
       email: email,
       password: password
     };
@@ -80,6 +86,17 @@ function Signup() {
               name="name"
               value={name}
               onChange={handleNameChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="name">Roll No:</label>
+            <input
+              type="text"
+              id="rollno"
+              name="rollno"
+              value={rollno}
+              onChange={handleRollNoChange}
               required
             />
           </div>

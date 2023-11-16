@@ -33,11 +33,13 @@ const fetchItemPersonal = async (req, res) => {
 
 const createItemPersonal = async (req, res) => {
     const itemname = req.body.itemname;
+    const rollno = req.body.rollno;
     const itemdescription = req.body.itemdescription;
     const concerntype = req.body.concerntype;
 
     const item = await Item.create({
         itemname: itemname,
+        rollno: rollno,
         itemdescription: itemdescription,
         concerntype: concerntype,
         user: req.user._id
@@ -52,12 +54,14 @@ const updateItemPersonal = async (req, res) => {
 
         // get the data off the req body
         const itemname = req.body.itemname;
+        const rollno = req.body.rollno;
         const itemdescription = req.body.itemdescription;
         const concerntype = req.body.concerntype;
 
         // find and update the record
         const deprecatedItem = await Item.findOneAndUpdate({ _id: itemId, user: req.user._id }, {
             itemname: itemname,
+            rollno: rollno,
             itemdescription: itemdescription,
             itemconcerntype: concerntype
         })

@@ -6,6 +6,11 @@ const UserSchema = new mongoose.Schema({
         required: true,
         minlength: 3
     },
+    rollno: {
+        type: String,
+        required: true,
+        unique: [true, "This Roll No is already registered"]
+    },
     email: {
         type: String,
         required: true,
@@ -27,4 +32,4 @@ const UserSchema = new mongoose.Schema({
     ]
 });
 
-module.exports = new mongoose.model("User", UserSchema);
+module.exports = mongoose.model("User", UserSchema);

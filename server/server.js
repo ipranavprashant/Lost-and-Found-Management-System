@@ -34,6 +34,7 @@ connectToMongo();
 app.post("/signup", userController.signup);
 app.post("/login", userController.login);
 app.get("/logout", userController.logout);
+app.get("/fetchuser/:id", userController.fetchUser);
 app.get("/check-auth", requireAuth, userController.checkAuth);
 
 app.post("/item", itemController.createItem);

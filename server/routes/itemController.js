@@ -37,13 +37,13 @@ const createItem = async (req, res) => {
     const itemname = req.body.itemname;
     const itemdescription = req.body.itemdescription;
     const concerntype = req.body.concerntype;
-    
-    const item=await Item.create({
-        itemname:itemname,
-        itemdescription:itemdescription,
-        concerntype:concerntype,
+
+    const item = await Item.create({
+        itemname: itemname,
+        itemdescription: itemdescription,
+        concerntype: concerntype
     })
-    res.json({item:item});
+    res.json({ item: item });
 }
 
 
@@ -59,7 +59,7 @@ const updateItem = async (req, res) => {
         const concerntype = req.body.concerntype;
 
         // find and update the record
-        const deprecatedItem = await Item.findOne({_id:itemId }, {
+        const deprecatedItem = await Item.findOne({ _id: itemId }, {
             itemname: itemname,
             itemdescription: itemdescription,
             itemconcerntype: concerntype

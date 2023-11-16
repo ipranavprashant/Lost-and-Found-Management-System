@@ -4,7 +4,7 @@ const User = require("../models/UserSchema");
 
 const signup = async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { username, rollno, email, password } = req.body;
 
     // Hash password
     const hashedPassword = bcrypt.hashSync(password, 8);
@@ -12,6 +12,7 @@ const signup = async (req, res) => {
     // Create a user with the data
     const user = await User.create({
       username: username,
+      rollno: rollno,
       email: email,
       password: hashedPassword
     });
@@ -77,6 +78,23 @@ const logout = (req, res) => {
   }
 }
 
+const fetchUser = async (req, res) => {
+  try {
+    // get id off the url
+    const userId = req.params.id;
+
+    // find the notes using that id
+    const user = await User.findById(userId);
+
+    // respond with them
+    res.json({ gotUser: user });
+  } catch (error) {
+    // Handle errors here
+    console.error("Error during fetchItem:", error);
+    res.status(500).send("Internal Server Error");
+  }
+}
+
 const checkAuth = (req, res) => {
   try {
     console.log(req.user);
@@ -91,6 +109,7 @@ const checkAuth = (req, res) => {
 
 module.exports = {
   signup: signup,
+  fetchUser:fetchUser,
   login: login,
   logout: logout,
   checkAuth: checkAuth
