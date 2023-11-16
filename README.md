@@ -1,4 +1,4 @@
-Certainly! Below is a the instruction for a MERN (MongoDB, Express.js, React, Node.js) stack application with server.js and app.js that builds up the lost and found management system
+Below is a the instruction for a MERN (MongoDB, Express.js, React, Node.js) stack application with server.js and app.js that builds up the lost and found management system
 
 ```markdown
 # Lost and found management system Application
