@@ -24,12 +24,12 @@ const UserSchema = new mongoose.Schema({
         type: Date,
         default: Date.now()
     },
-    item: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Item"
-        }
-    ]
+    // item: [
+    //     {
+    //         type: mongoose.Schema.Types.ObjectId,
+    //         ref: "Item"
+    //     }
+    // ]
 });
 
 module.exports = mongoose.model("User", UserSchema);

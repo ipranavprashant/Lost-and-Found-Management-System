@@ -57,6 +57,7 @@ const createItem = async (req, res) => {
 
         // Get the user ID from the authenticated user (assuming you have authentication middleware)
         const userId = req.user._id; // Adjust this based on your authentication setup
+        console.log(req.user);
 
         // Create the item with the associated user
         const item = await Item.create({
