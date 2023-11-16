@@ -1,12 +1,68 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './LostAndFoundForm.css';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
+
 const Base_URL = "https://lostandfoundbackend-y9qs.onrender.com";
 // const Base_URL = "http://localhost:5000";
 
 function LostAndFoundForm() {
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        // Assuming you have a token stored in localStorage after user login
+        const authToken = localStorage.getItem('authToken');
+
+        if (!authToken) {
+          console.error('No authentication token found');
+          return;
+        }
+        console.log(authToken);
+        // Decode the JWT token to get user information
+        const decodedToken = decodeJwtToken(authToken);
+
+        // Check if userId is present in the decoded token
+        if (!decodedToken || !decodedToken.userId) {
+          console.error('Invalid or missing userId in the token');
+          return;
+        }
+
+        console.log('decodedToken:', decodedToken);
+        const userId = decodedToken.sub;
+        setUserId(decodedToken.sub);
+        console.log(userId);
+
+        // Replace 'your-api-endpoint' with the actual endpoint for fetching user details
+        const response = await axios.get(`${Base_URL}/fetchuser/${userId}`, {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+            withCredentials: true,
+          },
+        });
+
+        console.log(response);
+
+      } catch (error) {
+        console.error('Error fetching user details:', error);
+      }
+    };
+
+    fetchUserDetails();
+  }, []);
+
+  const decodeJwtToken = (token) => {
+    try {
+      // Use jwtDecode to decode the JWT token
+      return jwtDecode(token);
+    } catch (error) {
+      console.error('Error decoding JWT token:', error);
+      return null;
+    }
+  };
   const navigate = useNavigate();
   const [itemname, setItemName] = useState('');
   const [itemdescription, setItemDescription] = useState('');
@@ -40,7 +96,8 @@ function LostAndFoundForm() {
 
     try {
       // Make API calls with the withCredentials option
-      await axios.post(`${Base_URL}/item`, data);
+      await axios.post(`${Base_URL}/item/${userId}`, data);
+      // await axios.post(`${Base_URL}/personalitem`, data, { withCredentials: true });
 
       // Reset the form fields after successful submission
       setItemName('');
@@ -51,7 +108,7 @@ function LostAndFoundForm() {
       alert("Item has been added successfully");
 
       // Navigate to the desired page
-      navigate("/my-items/");
+      navigate("/all-items/lost");
     } catch (error) {
       console.error('Error submitting item:', error);
     }
