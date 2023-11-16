@@ -17,7 +17,8 @@ const fetchItems = async (req, res) => {
 const fetchUserSpecificItems = async (req, res) => {
     try {
         console.log(req.user);
-        const userId = req.user._id;
+        // const userId = req.user._id;
+        const userId = req.params.id;
         // find the items for the specified user ID
         const items = await Item.find({ user: userId });
 

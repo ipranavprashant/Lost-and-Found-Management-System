@@ -33,11 +33,11 @@ connectToMongo();
 app.post("/signup", userController.signup);
 app.post("/login", userController.login);
 app.get("/logout", userController.logout);
-app.get("/fetchuser/:id", userController.fetchUser);
+app.get("/fetchuser/:id",requireAuth, userController.fetchUser);
 app.get("/check-auth", requireAuth, userController.checkAuth);
 
 app.post("/item",requireAuth, itemController.createItem);
-app.get("/item/user/", requireAuth, itemController.fetchUserSpecificItems);
+app.get("/item/user/:id", itemController.fetchUserSpecificItems);
 app.get("/item/", itemController.fetchItems);
 app.get("/item/:id", itemController.fetchItem);
 app.put("/item/:id", itemController.updateItem);
