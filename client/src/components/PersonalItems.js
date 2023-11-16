@@ -26,7 +26,7 @@ const PersonalItems = (props) => {
     };
 
     const res = await axios.get(`${Base_URL}/item/user/`, config);
-
+    console.log(res);
     setItems(res.data.gotItems);
   } catch (error) {
     console.error('Error fetching items:', error);

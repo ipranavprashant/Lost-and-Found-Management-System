@@ -39,8 +39,18 @@ function LostAndFoundForm() {
     };
 
     try {
+      const token = localStorage.getItem('authToken');
+    if (!token) {
+      console.error('No authentication token found.');
+      return;
+    }
+
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+      withCredentials: true,
+    };
       // Make API calls with the withCredentials option
-      await axios.post(`${Base_URL}/item`, data, { withCredentials: true });
+      await axios.post(`${Base_URL}/item`, data, config);
 
       // Reset the form fields after successful submission
       setItemName('');

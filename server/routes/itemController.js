@@ -63,7 +63,7 @@ const createItem = async (req, res) => {
             itemname: itemname,
             itemdescription: itemdescription,
             concerntype: concerntype,
-            user: userId, // Include the user ID in the item
+            // user: userId, // Include the user ID in the item
         });
 
         // Respond with the created item
