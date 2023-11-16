@@ -53,10 +53,6 @@ The application should now be running on `http://localhost:3000`.
 
 - **Database**: Configure your MongoDB connection string in `server.js`.
 
-## Contributing
-
-Feel free to contribute to the development of this application by following our [Contribution Guidelines](CONTRIBUTING.md).
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
