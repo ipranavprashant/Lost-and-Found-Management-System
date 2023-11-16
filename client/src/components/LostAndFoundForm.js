@@ -26,10 +26,10 @@ function LostAndFoundForm() {
         const decodedToken = decodeJwtToken(authToken);
 
         // Check if userId is present in the decoded token
-        if (!decodedToken || !decodedToken.userId) {
-          console.error('Invalid or missing userId in the token');
-          return;
-        }
+        // if (!decodedToken || !decodedToken.userId) {
+        //   console.error('Invalid or missing userId in the token');
+        //   return;
+        // }
 
         console.log('decodedToken:', decodedToken);
         const userId = decodedToken.sub;
