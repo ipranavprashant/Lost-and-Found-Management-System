@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from './Navbar';
 import DisplayPersonalItems from './DisplayPersonalItems';
-const Base_URL = "https://lostandfoundbackend-y9qs.onrender.com";
-// const Base_URL = "http://localhost:5000";
+// const Base_URL = "https://lostandfoundbackend-y9qs.onrender.com";
+const Base_URL = "http://localhost:5000";
 
 const PersonalItems = (props) => {
   const [items, setItems] = useState([]);
@@ -19,11 +19,14 @@ const PersonalItems = (props) => {
       console.error('No authentication token found.');
       return;
     }
-
     const config = {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
       withCredentials: true,
     };
+    
 
     const res = await axios.get(`${Base_URL}/item/user/`, config);
     console.log(res);
