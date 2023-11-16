@@ -81,8 +81,7 @@ const logout = (req, res) => {
 const fetchUser = async (req, res) => {
   try {
     // get id off the url
-    const userId1 = req.params.id;
-    const userId = req.user._id;
+    const userId = req.params.id;
 
     // find the notes using that id
     const user = await User.findById(userId);

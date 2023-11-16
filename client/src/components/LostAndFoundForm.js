@@ -40,7 +40,7 @@ function LostAndFoundForm() {
 
     try {
       // Make API calls with the withCredentials option
-      await axios.post(`${Base_URL}/item`, data, config);
+      await axios.post(`${Base_URL}/item`, data);
 
       // Reset the form fields after successful submission
       setItemName('');
