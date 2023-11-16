@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 
 const ItemSchema = new mongoose.Schema({
+    // this is basically a foreign key which is getting its reference from the User.js model
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
     itemname: {
         type: String,
         required: true,

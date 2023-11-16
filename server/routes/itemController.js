@@ -14,6 +14,21 @@ const fetchItems = async (req, res) => {
     }
 }
 
+const fetchUserSpecificItems = async (req, res) => {
+    try {
+        console.log(req.user);
+        const userId = req.user._id;
+        // find the items for the specified user ID
+        const items = await Item.find({ user: userId });
+
+        // respond with them
+        res.json({ gotItems: items });
+    } catch (error) {
+        // Handle errors here
+        console.error("Error during fetchItemsPersonal:", error);
+        res.status(500).send("Internal Server Error");
+    }
+}
 
 const fetchItem = async (req, res) => {
     try {
@@ -34,17 +49,32 @@ const fetchItem = async (req, res) => {
 
 
 const createItem = async (req, res) => {
-    const itemname = req.body.itemname;
-    const itemdescription = req.body.itemdescription;
-    const concerntype = req.body.concerntype;
+    try {
+        // Extract data from the request body
+        const itemname = req.body.itemname;
+        const itemdescription = req.body.itemdescription;
+        const concerntype = req.body.concerntype;
 
-    const item = await Item.create({
-        itemname: itemname,
-        itemdescription: itemdescription,
-        concerntype: concerntype
-    })
-    res.json({ item: item });
-}
+        // Get the user ID from the authenticated user (assuming you have authentication middleware)
+        const userId = req.user._id; // Adjust this based on your authentication setup
+
+        // Create the item with the associated user
+        const item = await Item.create({
+            itemname: itemname,
+            itemdescription: itemdescription,
+            concerntype: concerntype,
+            user: userId, // Include the user ID in the item
+        });
+
+        // Respond with the created item
+        res.json({ item: item });
+    } catch (error) {
+        // Handle errors here
+        console.error("Error during createItem:", error);
+        res.status(500).send("Internal Server Error");
+    }
+};
+
 
 
 
@@ -98,6 +128,7 @@ const deleteItem = async (req, res) => {
 
 module.exports = {
     fetchItem: fetchItem,
+    fetchUserSpecificItems: fetchUserSpecificItems,
     fetchItems: fetchItems,
     createItem: createItem,
     updateItem: updateItem,

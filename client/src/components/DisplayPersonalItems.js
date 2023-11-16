@@ -29,7 +29,7 @@ const DisplayPersonalItems = (props) => {
     const handleResolve = async (_id) => {
         try {
             // Include the withCredentials option for the delete request
-            await axios.delete(`${Base_URL}/personalitem/${_id}`, { withCredentials: true });
+            await axios.delete(`${Base_URL}/item/${_id}`, { withCredentials: true });
             alert('Item has been successfully removed!');
         } catch (error) {
             console.error('Error deleting item:', error);

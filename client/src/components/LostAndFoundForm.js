@@ -41,7 +41,6 @@ function LostAndFoundForm() {
     try {
       // Make API calls with the withCredentials option
       await axios.post(`${Base_URL}/item`, data, { withCredentials: true });
-      await axios.post(`${Base_URL}/personalitem`, data, { withCredentials: true });
 
       // Reset the form fields after successful submission
       setItemName('');
@@ -52,7 +51,7 @@ function LostAndFoundForm() {
       alert("Item has been added successfully");
 
       // Navigate to the desired page
-      navigate("/all-items/lost");
+      navigate("/my-items/");
     } catch (error) {
       console.error('Error submitting item:', error);
     }

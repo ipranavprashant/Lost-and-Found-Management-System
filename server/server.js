@@ -12,7 +12,6 @@ const userController = require('./routes/userController');
 const claimantController = require('./routes/claimantController');
 const helperController = require('./routes/helperController');
 const requireAuth = require('./middleware/requireAuth');
-const personalItemController = require("./routes/personalItemController");
 
 // Create an express app
 const app = express();
@@ -37,8 +36,9 @@ app.get("/logout", userController.logout);
 app.get("/fetchuser/:id", userController.fetchUser);
 app.get("/check-auth", requireAuth, userController.checkAuth);
 
-app.post("/item", itemController.createItem);
-app.get("/item", itemController.fetchItems);
+app.post("/item",requireAuth, itemController.createItem);
+app.get("/item/user/", requireAuth, itemController.fetchUserSpecificItems);
+app.get("/item/", requireAuth, itemController.fetchItems);
 app.get("/item/:id", itemController.fetchItem);
 app.put("/item/:id", itemController.updateItem);
 app.delete("/item/:id", itemController.deleteItem);
@@ -54,13 +54,6 @@ app.get("/helper", helperController.fetchHelpers);
 app.get("/helper/:id", helperController.fetchHelper);
 app.put("/helper/:id", helperController.updateHelper);
 app.delete("/helper/:id", helperController.deleteHelper);
-
-
-app.post("/personalitem", requireAuth, personalItemController.createItemPersonal);
-app.get("/personalitem", requireAuth, personalItemController.fetchItemsPersonal);
-app.get("/personalitem/:id", requireAuth, personalItemController.fetchItemPersonal);
-app.put("/personalitem/:id", requireAuth, personalItemController.updateItemPersonal);
-app.delete("/personalitem/:id", requireAuth, personalItemController.deleteItemPersonal);
 
 // Start our server
 app.listen(process.env.PORT);
