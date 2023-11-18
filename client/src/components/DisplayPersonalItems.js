@@ -49,7 +49,7 @@ const DisplayPersonalItems = (props) => {
           <div>
             <p>Images:</p>
             {item.images.map((image, index) => (
-              <img key={index} src={image} alt={`Image ${index}`} style={{ maxWidth: '500px', maxHeight: '500px', margin: '5px' }} />
+              <img key={index} src={image} alt="png" style={{ maxWidth: '500px', maxHeight: '500px', margin: '5px' }} />
             ))}
           </div>
         )}
