@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-const navigate = useNavigate();
 
 
 const Navbar = () => {
+  
+const navigate = useNavigate();
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const isAuthenticated = localStorage.getItem('authToken');
