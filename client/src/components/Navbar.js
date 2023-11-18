@@ -14,6 +14,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('authToken');
+    window.location.reload(true);
     alert('Successfully logged out');
   };
 
