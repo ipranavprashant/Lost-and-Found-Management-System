@@ -115,6 +115,15 @@ const LostItems = (props) => {
         <h2>Name: {item.itemname}</h2>
         <p>Description: {item.itemdescription}</p>
         <p>This item has been <b>{item.concerntype}</b></p>
+        {/* Displaying Images */}
+        {item.images && item.images.length > 0 && (
+          <div>
+            <p>Images:</p>
+            {item.images.map((image, index) => (
+              <img key={index} src={image} alt={`Image ${index}`} style={{ maxWidth: '500px', maxHeight: '500px', margin: '5px' }} />
+            ))}
+          </div>
+        )}
       </div>
       <div>
         <button onClick={item.concerntype === 'lost' ? handleHelp : handleClaim} style={btnStyle}>
