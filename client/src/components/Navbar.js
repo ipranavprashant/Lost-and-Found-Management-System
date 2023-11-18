@@ -14,9 +14,12 @@ const Navbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('authToken');
-    window.location.reload(true);
-    alert('Successfully logged out');
+    navigate("/home").then(() => {
+      window.location.reload(true);
+      alert('Successfully logged out');
+    });
   };
+  
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -84,7 +87,7 @@ const Navbar = () => {
     <div style={navbarStyle}>
       <div>
         <div style={linkContainerStyle}>
-          <Link to="/" style={linkStyle}>
+          <Link to="/home" style={linkStyle}>
             Home
           </Link>
           {isAuthenticated && (
