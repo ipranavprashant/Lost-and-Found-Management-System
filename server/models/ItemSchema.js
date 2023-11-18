@@ -7,8 +7,8 @@ const ItemSchema = new mongoose.Schema({
     //     ref: 'User'
     // },
     user: {
-        type:String,
-        required:true
+        type: String,
+        required: true
     },
     itemname: {
         type: String,
@@ -22,10 +22,14 @@ const ItemSchema = new mongoose.Schema({
     },
     concerntype: {
         type: String,
+        enum: ['lost', 'found'], // Specify the allowed values
     },
+
+    images: [{ type: String }], // Array to store image paths
     date: {
         type: Date,
-        default: Date.now()
+        // default: Date.now(),
+        default: Date.now //This way, the date will be set when the document is created but won't update when the document is modified.
     }
 });
 

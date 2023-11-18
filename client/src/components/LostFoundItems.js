@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from "axios";
-const Base_URL = "https://lostandfoundbackend-y9qs.onrender.com";
-// const Base_URL = "http://localhost:5000";
+import config from './config';
+
+const Base_URL = config.baseURL;
 
 const LostItems = (props) => {
   const { item } = props;
@@ -95,7 +96,7 @@ const LostItems = (props) => {
         mobilenumber: userMobile,
         hostelname: userHostel,
         proofofclaim: proofOfClaim,
-        itemdetails: `${item.itemname} - ${item.itemdescription} (Claimed)`,
+        itemdetails: `${item.itemname} - ${item.itemdescription}`,
       };
 
       await axios.post(`${Base_URL}/claimant`, data);

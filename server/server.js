@@ -6,6 +6,7 @@ if (process.env.NODE_ENV !== "production") {
 const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 const connectToMongo = require('./config/connectToMongo');
 const itemController = require('./routes/itemController');
 const userController = require('./routes/userController');
@@ -17,7 +18,9 @@ const requireAuth = require('./middleware/requireAuth');
 const app = express();
 
 // Configure express app
-app.use(express.json());
+app.use(express.json({ limit: '500mb' })); // Adjust the limit as needed based on image
+app.use(bodyParser.json({ limit: '500mb' }));
+app.use(bodyParser.urlencoded({ limit: '500mb', extended: true }));
 app.use(cookieParser());
 
 app.use(cors({

@@ -48,8 +48,8 @@ const fetchItem = async (req, res) => {
     }
 }
 
-
 const createItem = async (req, res) => {
+    const { images } = req.body;
     try {
         // Extract data from the request body
         const itemname = req.body.itemname;
@@ -58,13 +58,13 @@ const createItem = async (req, res) => {
 
         // Get the user ID from the authenticated user (assuming you have authentication middleware)
         const userId = req.params.id; // Adjust this based on your authentication setup
-        console.log(req.user);
 
         // Create the item with the associated user
         const item = await Item.create({
             itemname: itemname,
             itemdescription: itemdescription,
             concerntype: concerntype,
+            images: images,
             user: userId, // Include the user ID in the item
         });
 
@@ -76,9 +76,6 @@ const createItem = async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 };
-
-
-
 
 const updateItem = async (req, res) => {
     try {

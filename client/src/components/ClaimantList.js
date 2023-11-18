@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react';
 import axios from "axios";
 import DisplayCardClaimer from './DisplayCardClaimer';
 import Navbar from './Navbar';
+import config from './config';
 
-const Base_URL="https://lostandfoundbackend-y9qs.onrender.com";
-// const Base_URL = "http://localhost:5000";
+const Base_URL = config.baseURL;
 
 const ClaimantList = () => {
   const [claimants, setClaimants] = useState([]);

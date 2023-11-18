@@ -4,8 +4,9 @@ import GroupInfo from './GroupInfo';
 import Navbar from './Navbar';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
-const Base_URL="https://lostandfoundbackend-y9qs.onrender.com";
-// const Base_URL = "http://localhost:5000";
+import config from './config';
+
+const Base_URL = config.baseURL;
 
 const HomePage = () => {
   const [userDetails, setUserDetails] = useState(null);
@@ -20,19 +21,13 @@ const HomePage = () => {
           console.error('No authentication token found');
           return;
         }
-        console.log(authToken);
+        // console.log(authToken);
         // Decode the JWT token to get user information
         const decodedToken = decodeJwtToken(authToken);
 
-        // Check if userId is present in the decoded token
-        // if (!decodedToken || !decodedToken.userId) {
-        //   console.error('Invalid or missing userId in the token');
-        //   return;
-        // }
-
-        console.log('decodedToken:', decodedToken);
+        // console.log('decodedToken:', decodedToken);
         const userId = decodedToken.sub;
-        console.log(userId);
+        // console.log(userId);
 
         // Replace 'your-api-endpoint' with the actual endpoint for fetching user details
         const response = await axios.get(`${Base_URL}/fetchuser/${userId}`, {
@@ -44,7 +39,7 @@ const HomePage = () => {
 
         // Assuming the response contains user details with 'username' property
         setUserDetails(response);
-        console.log(response);
+        // console.log(response);
 
       } catch (error) {
         console.error('Error fetching user details:', error);
@@ -96,7 +91,7 @@ const HomePage = () => {
       <Navbar />
       <div style={containerStyle}>
         <h1 style={headingStyle}>
-          Welcome to the Lost and Found Tracking System for NITC
+          Welcome to the Lost and Found Tracking System
         </h1>
         {/* Conditionally render based on authentication status */}
         {!userDetails ? (
@@ -110,7 +105,7 @@ const HomePage = () => {
           </>
         ) : (
           <>
-            <p style={paragraphStyle}>Welcome <b>{userDetails.data.gotUser.username}</b>, proceed to raising a concern</p>
+            <p style={paragraphStyle}>Welcome <b>{userDetails.data.gotUser.username}-({userDetails.data.gotUser.rollno})</b>, proceed to raising a concern</p>
             <Link to="/raise-a-concern">
               <button className="sign-in-button" style={buttonStyle}>
                 Raise
