@@ -136,9 +136,9 @@ const navigate = useNavigate();
             </>
           )}
         </div>
-        <div style={iconStyle} onClick={handleToggleMenu}>
+        <span style={iconStyle} onClick={handleToggleMenu}>
           {menuOpen ? '✕' : '☰'}
-        </div>
+        </span>
       </div>
       <div style={menuStyle}>
         <Link to="/home" style={linkStyle}>
