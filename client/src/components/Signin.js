@@ -53,7 +53,7 @@ function Signin() {
       localStorage.setItem('authToken', token);
 
       alert("Successfully signed in, you can now raise your concerns!");
-      navigate("/home");
+      navigate("/");
     } catch (error) {
       console.error("Error during login:", error);
       alert("An error occurred during login. Please try again.");

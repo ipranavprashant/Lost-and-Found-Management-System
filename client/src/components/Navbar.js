@@ -84,7 +84,7 @@ const Navbar = () => {
     <div style={navbarStyle}>
       <div>
         <div style={linkContainerStyle}>
-          <Link to="/home" style={linkStyle}>
+          <Link to="/" style={linkStyle}>
             Home
           </Link>
           {isAuthenticated && (
