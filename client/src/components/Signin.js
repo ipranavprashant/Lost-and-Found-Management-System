@@ -56,7 +56,7 @@ function Signin() {
       navigate("/home");
     } catch (error) {
       console.error("Error during login:", error);
-      alert("An error occurred during login. Please try again.");
+      alert("Wrong Credentials. Please try again.");
     }
   };
 
