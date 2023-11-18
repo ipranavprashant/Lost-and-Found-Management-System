@@ -61,7 +61,7 @@ const HomePage = () => {
 
   const containerStyle = {
     textAlign: 'center',
-    marginTop: '10rem',
+    marginTop: '15rem',
   };
 
   const headingStyle = {

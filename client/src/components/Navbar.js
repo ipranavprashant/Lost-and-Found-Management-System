@@ -27,7 +27,7 @@ const navigate = useNavigate();
 
   useEffect(() => {
     const checkScreenSize = () => {
-      setIsSmallScreen(window.matchMedia('(max-width: 768px)').matches);
+      setIsSmallScreen(window.matchMedia('(max-width: 1000px)').matches);
     };
 
     // Check screen size on mount
@@ -50,6 +50,7 @@ const navigate = useNavigate();
     padding: '10px 20px',
     boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
     height: '50px',
+    margin:'auto'
   };
 
   const linkContainerStyle = {
@@ -78,7 +79,9 @@ const navigate = useNavigate();
     flexDirection: 'column',
     alignItems: 'center',
     position: 'absolute',
-    top: '70px',
+    width:'90%',
+    margin:'auto',
+    top: '72px',
     left: '0',
     right: '0',
     backgroundColor: '#0077B6',

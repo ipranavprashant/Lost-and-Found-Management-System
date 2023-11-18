@@ -67,10 +67,14 @@ const PersonalItems = (props) => {
     return <DisplayPersonalItems key={item._id} item={item} />;
   };
 
+  const componentPadding = {
+    padding: '10px',
+  };
+
   return (
     <>
       <Navbar />
-      <div>
+      <div style={componentPadding}>
         <h1>My Items {props.req}:</h1>
         <h3>*If your items ain't visible, make sure you raise a concern before.*</h3>
         {items.length === 0 ? (

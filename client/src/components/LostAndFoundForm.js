@@ -152,6 +152,7 @@ function LostAndFoundForm() {
               value={concerntype}
               onChange={handleConcernTypeChange}
               className='form-group1'
+              style={{ maxWidth: '105%' }} // Set maximum width for the dropdown
             >
               <option value="lost">Lost</option>
               <option value="found">Found</option>

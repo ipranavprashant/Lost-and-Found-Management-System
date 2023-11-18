@@ -9,6 +9,7 @@ import LostAndFoundList from './components/LostAndFoundList';
 import HelperList from './components/HelperList';
 import ClaimantList from './components/ClaimantList';
 import PersonalItems from './components/PersonalItems';
+import './App.css'
 
 const App = () => {
   // const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('authToken'));

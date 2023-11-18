@@ -37,10 +37,14 @@ const LostAndFoundList = (props) => {
     }
   }
 
+  const componentPadding = {
+    padding: '10px',
+  };
+
   return (
     <>
       <Navbar />
-      <div>
+      <div style={componentPadding}>
         <h1>Items {props.req}:</h1>
         <h3>*If your items ain't visible, make sure you raise a concern before.*</h3>
         {items.length === 0 ? (

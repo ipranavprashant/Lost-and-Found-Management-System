@@ -23,8 +23,7 @@ const LostItems = (props) => {
     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
     margin: '10px',
     display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: 'column',  // Adjusted to stack content vertically
   };
 
   const btnStyle = {
@@ -50,6 +49,22 @@ const LostItems = (props) => {
     height: '15px',
     marginBottom: '5px',
   };
+
+  const imageStyle = {
+    width: '100%',
+    maxHeight: '500px',
+    margin: '5px',
+  };
+
+  // Define a media query for larger screens
+  const largerScreenMediaQuery = window.matchMedia('(min-width: 768px)');
+
+  // Check if the screen matches the larger screen media query
+  if (largerScreenMediaQuery.matches) {
+    imageStyle.maxWidth = '40%';
+  } else {
+    imageStyle.maxWidth = '100%';
+  }
 
   const closeButtonStyle = {
     cursor: 'pointer',
@@ -89,21 +104,23 @@ const LostItems = (props) => {
         <h2>Name: {item.itemname}</h2>
         <p>Description: {item.itemdescription}</p>
         <p>This item has been <b>{item.concerntype}</b></p>
-                {/* Displaying Images */}
-                {item.images && item.images.length > 0 && (
+        {item.images && item.images.length > 0 && (
           <div>
             <p>Images:</p>
             {item.images.map((image, index) => (
-              <img key={index} src={image} alt="png" style={{ maxWidth: '500px', maxHeight: '500px', margin: '5px' }} />
+              <img
+                key={index}
+                src={image}
+                alt="png"
+                style={imageStyle}
+              />
             ))}
           </div>
         )}
       </div>
-      <div>
-        <button onClick={handleHelp} style={btnStyle}>
-          Help
-        </button>
-      </div>
+      <button onClick={handleHelp} style={btnStyle}>
+        Help
+      </button>
 
       {/* Modal for Help or Claim */}
       {isModalOpen && (
