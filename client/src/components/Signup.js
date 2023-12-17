@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import './Signup.css';
-import { useNavigate } from 'react-router-dom';
-import Navbar from './Navbar';
-import axios from 'axios';
-import config from './config';
+import React, { useState } from "react";
+import "./Signup.css";
+import { useNavigate } from "react-router-dom";
+import Navbar from "./Navbar";
+import axios from "axios";
+import config from "./config";
 
 const Base_URL = config.baseURL;
 
 function Signup() {
   const navigate = useNavigate();
 
-  const [name, setName] = useState('');
-  const [rollno, setRollNo] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [name, setName] = useState("");
+  const [rollno, setRollNo] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -39,7 +39,6 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Password confirmation validation
     if (password !== confirmPassword) {
       alert("Passwords do not match");
       return;
@@ -49,7 +48,7 @@ function Signup() {
       username: name,
       rollno: rollno,
       email: email,
-      password: password
+      password: password,
     };
 
     try {
@@ -63,15 +62,16 @@ function Signup() {
       }
     } catch (error) {
       if (error.response && error.response.status === 409) {
-        // 409 status code indicates a conflict, meaning the email already exists
         alert("Email already exists. Please use a different email.");
       } else {
-        console.error("Error during signup:", error.response ? error.response.data : error.message);
+        console.error(
+          "Error during signup:",
+          error.response ? error.response.data : error.message
+        );
         alert("An error occurred during signup. Please try again.");
       }
     }
   };
-
 
   return (
     <>

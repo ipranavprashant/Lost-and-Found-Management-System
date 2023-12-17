@@ -24,7 +24,7 @@
   cursor: pointer;
 }
 
-@media screen and (max-width:1000px) {
+@media screen and (max-width: 1000px) {
   .error-404 {
     font-size: 3rem;
   }

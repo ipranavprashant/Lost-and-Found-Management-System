@@ -1,14 +1,10 @@
 body {
-    /* padding-right: 50px; */
-    /* padding-left: 50px; */
-    background-color: rgb(251, 251, 251);
+  background-color: rgb(251, 251, 251);
+}
+
+@media (max-width: 767px) {
+  body {
+    padding-right: 5px;
+    padding-left: 5px;
   }
-  
-  /* Media query for small screens */
-  @media (max-width: 767px) {
-    body {
-      padding-right: 5px;
-      padding-left: 5px;
-    }
-  }
-  
+}

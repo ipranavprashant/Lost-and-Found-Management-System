@@ -37,7 +37,6 @@ input[type="password"] {
 
 textarea {
   resize: vertical;
-  /* Allow vertical resizing of the textarea */
 }
 
 .submit-button {

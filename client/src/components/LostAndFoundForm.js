@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import './LostAndFoundForm.css';
-import { useNavigate } from 'react-router-dom';
-import Navbar from './Navbar';
-import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
-import config from './config';
+import React, { useState, useEffect } from "react";
+import "./LostAndFoundForm.css";
+import { useNavigate } from "react-router-dom";
+import Navbar from "./Navbar";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
+import config from "./config";
 
 const Base_URL = config.baseURL;
 function LostAndFoundForm() {
@@ -14,10 +14,10 @@ function LostAndFoundForm() {
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        const authToken = localStorage.getItem('authToken');
+        const authToken = localStorage.getItem("authToken");
 
         if (!authToken) {
-          console.error('No authentication token found');
+          console.error("No authentication token found");
           return;
         }
 
@@ -36,7 +36,7 @@ function LostAndFoundForm() {
 
         console.log(response);
       } catch (error) {
-        console.error('Error fetching user details:', error);
+        console.error("Error fetching user details:", error);
       }
     };
 
@@ -47,15 +47,15 @@ function LostAndFoundForm() {
     try {
       return jwtDecode(token);
     } catch (error) {
-      console.error('Error decoding JWT token:', error);
+      console.error("Error decoding JWT token:", error);
       return null;
     }
   };
 
   const navigate = useNavigate();
-  const [itemname, setItemName] = useState('');
-  const [itemdescription, setItemDescription] = useState('');
-  const [concerntype, setConcernType] = useState('lost');
+  const [itemname, setItemName] = useState("");
+  const [itemdescription, setItemDescription] = useState("");
+  const [concerntype, setConcernType] = useState("lost");
 
   const convertToBase64 = (e) => {
     const files = Array.from(e.target.files);
@@ -93,7 +93,7 @@ function LostAndFoundForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log('Images:', images); // Add this line to check the images array
+    console.log("Images:", images);
 
     const data = {
       itemname: itemname,
@@ -104,16 +104,16 @@ function LostAndFoundForm() {
 
     try {
       await axios.post(`${Base_URL}/item/${userId}`, data);
-      setItemName('');
-      setItemDescription('');
-      setConcernType('lost');
+      setItemName("");
+      setItemDescription("");
+      setConcernType("lost");
       setImages([]);
 
       alert("Item has been added successfully");
 
       navigate("/my-items/");
     } catch (error) {
-      console.error('Error submitting item:', error);
+      console.error("Error submitting item:", error);
     }
   };
 
@@ -151,8 +151,8 @@ function LostAndFoundForm() {
               name="concerntype"
               value={concerntype}
               onChange={handleConcernTypeChange}
-              className='form-group1'
-              style={{ maxWidth: '105%' }} // Set maximum width for the dropdown
+              className="form-group1"
+              style={{ maxWidth: "105%" }}
             >
               <option value="lost">Lost</option>
               <option value="found">Found</option>
@@ -173,13 +173,23 @@ function LostAndFoundForm() {
                 <b>Preview:</b>
                 <div className="image-preview">
                   {images.map((img, index) => (
-                    <img key={index} width={100} height={100} src={img} alt={`Preview ${index}`} />
+                    <img
+                      key={index}
+                      width={100}
+                      height={100}
+                      src={img}
+                      alt={`Preview ${index}`}
+                    />
                   ))}
                 </div>
               </>
             )}
           </div>
-          <button className="submit-button" type="submit" onClick={handleSubmit}>
+          <button
+            className="submit-button"
+            type="submit"
+            onClick={handleSubmit}
+          >
             Submit
           </button>
         </form>

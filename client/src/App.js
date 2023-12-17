@@ -1,23 +1,20 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Signin from './components/Signin';
-import Signup from './components/Signup';
-import NotFound from './components/404';
-import LostAndFoundForm from './components/LostAndFoundForm';
-import HomePage from './components/HomePage';
-import LostAndFoundList from './components/LostAndFoundList';
-import HelperList from './components/HelperList';
-import ClaimantList from './components/ClaimantList';
-import PersonalItems from './components/PersonalItems';
-import './App.css'
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Signin from "./components/Signin";
+import Signup from "./components/Signup";
+import NotFound from "./components/404";
+import LostAndFoundForm from "./components/LostAndFoundForm";
+import HomePage from "./components/HomePage";
+import LostAndFoundList from "./components/LostAndFoundList";
+import HelperList from "./components/HelperList";
+import ClaimantList from "./components/ClaimantList";
+import PersonalItems from "./components/PersonalItems";
+import "./App.css";
+import { useSelector } from "react-redux";
+import { selectUser } from "./utils/userSlice";
 
 const App = () => {
-  // const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('authToken'));
-
-  // useEffect(() => {
-  //   // Update authentication status when 'authToken' changes in localStorage
-  //   setIsAuthenticated(!!localStorage.getItem('authToken'));
-  // }, []);
+  const user = useSelector(selectUser);
 
   return (
     <>
@@ -27,36 +24,31 @@ const App = () => {
         <Route path="/sign-in" element={<Signin />} />
         <Route path="/sign-up" element={<Signup />} />
         <Route path="/raise-a-concern" element={<LostAndFoundForm />} />
-        {/* <Route
-          path="/items"
-          element={isAuthenticated ? <LostAndFoundList /> : <Signin />}
+        <Route
+          path="/all-items"
+          element={user ? <LostAndFoundList /> : <Signin />}
         />
         <Route
-          path="/items/lost"
-          element={isAuthenticated ? <LostAndFoundList req="lost" /> : <Signin />}
+          path="/my-items"
+          element={user ? <PersonalItems /> : <Signin />}
         />
         <Route
-          path="/items/found"
-          element={isAuthenticated ? <LostAndFoundList req="found" /> : <Signin />}
+          path="/all-items/lost"
+          element={user ? <LostAndFoundList req="lost" /> : <Signin />}
         />
         <Route
-          path="/helpers"
-          element={isAuthenticated ? <HelperList /> : <Signin />}
+          path="/all-items/found"
+          element={user ? <LostAndFoundList req="found" /> : <Signin />}
         />
+        <Route path="/helpers" element={user ? <HelperList /> : <Signin />} />
         <Route
           path="/claimants"
-          element={isAuthenticated ? <ClaimantList /> : <Signin />}
-        /> */}
-        <Route path="/all-items" element={<LostAndFoundList />} />
-        <Route path="/my-items" element={<PersonalItems />} />
-        <Route path="/all-items/lost" element={<LostAndFoundList req="lost" />} />
-        <Route path="/all-items/found" element={<LostAndFoundList req="found" />} />
-        <Route path="/helpers" element={<HelperList />} />
-        <Route path="/claimants" element={<ClaimantList />} />
+          element={user ? <ClaimantList /> : <Signin />}
+        />
         <Route path="/*" element={<NotFound />} />
       </Routes>
     </>
   );
-}
+};
 
 export default App;

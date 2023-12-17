@@ -1,93 +1,95 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { logout, selectUser } from "../utils/userSlice";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
-  
-const navigate = useNavigate();
+  const navigate = useNavigate();
+  const user = useSelector(selectUser);
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const isAuthenticated = localStorage.getItem('authToken');
-
+  // const user = localStorage.getItem("authToken");
 
   const handleToggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+  const dispatch = useDispatch();
 
   const handleLogout = () => {
-    localStorage.removeItem('authToken');
+    // localStorage.removeItem("authToken");
+    dispatch(logout());
     navigate("/home").then(() => {
-      window.location.reload(true);
-      alert('Successfully logged out');
+      // window.location.reload(true);
+      // alert("Successfully logged out");
     });
   };
-  
 
   useEffect(() => {
     const checkScreenSize = () => {
-      setIsSmallScreen(window.matchMedia('(max-width: 1000px)').matches);
+      setIsSmallScreen(window.matchMedia("(max-width: 1000px)").matches);
     };
 
     // Check screen size on mount
     checkScreenSize();
 
     // Add event listener for changes in screen size
-    window.addEventListener('resize', checkScreenSize);
+    window.addEventListener("resize", checkScreenSize);
 
     // Cleanup the event listener on component unmount
     return () => {
-      window.removeEventListener('resize', checkScreenSize);
+      window.removeEventListener("resize", checkScreenSize);
     };
   }, []);
 
   const navbarStyle = {
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#0077B6',
-    color: 'white',
-    padding: '10px 20px',
-    boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
-    height: '50px',
-    margin:'auto'
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: "#0077B6",
+    color: "white",
+    padding: "10px 20px",
+    boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
+    height: "50px",
+    margin: "auto",
   };
 
   const linkContainerStyle = {
-    display: !isSmallScreen ? 'flex' : 'none',
-    justifyContent: 'center',
+    display: !isSmallScreen ? "flex" : "none",
+    justifyContent: "center",
   };
 
   const linkStyle = {
-    color: 'white',
-    textDecoration: 'none',
-    fontSize: '16px',
-    fontWeight: 'bold',
-    margin: isSmallScreen ? '10px 0' : '10px 50px',
-    transition: 'color 0.3s',
-    display: isSmallScreen ? 'block' : 'inline-block',
+    color: "white",
+    textDecoration: "none",
+    fontSize: "16px",
+    fontWeight: "bold",
+    margin: isSmallScreen ? "10px 0" : "10px 50px",
+    transition: "color 0.3s",
+    display: isSmallScreen ? "block" : "inline-block",
   };
 
   const iconStyle = {
-    cursor: 'pointer',
-    display: isSmallScreen ? 'block' : 'none',
-    marginTop: '15px'
+    cursor: "pointer",
+    display: isSmallScreen ? "block" : "none",
+    marginTop: "15px",
   };
 
   const menuStyle = {
-    display: isSmallScreen ? (menuOpen ? 'flex' : 'none') : 'none', // Updated condition
-    flexDirection: 'column',
-    alignItems: 'center',
-    position: 'absolute',
-    width:'90%',
-    margin:'auto',
-    top: '72px',
-    left: '0',
-    right: '0',
-    backgroundColor: '#0077B6',
-    boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
+    display: isSmallScreen ? (menuOpen ? "flex" : "none") : "none", // Updated condition
+    flexDirection: "column",
+    alignItems: "center",
+    position: "absolute",
+    width: "90%",
+    margin: "auto",
+    top: "72px",
+    left: "0",
+    right: "0",
+    backgroundColor: "#0077B6",
+    boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
     zIndex: 1, // Ensure menu is on top
-    transition: '0.5s ease-in-out',
+    transition: "0.5s ease-in-out",
   };
 
   return (
@@ -97,7 +99,7 @@ const navigate = useNavigate();
           <Link to="/home" style={linkStyle}>
             Home
           </Link>
-          {isAuthenticated && (
+          {user && (
             <>
               <Link to="/my-items" style={linkStyle}>
                 My Items
@@ -125,7 +127,7 @@ const navigate = useNavigate();
               </Link>
             </>
           )}
-          {!isAuthenticated && (
+          {!user && (
             <>
               <Link to="/sign-up" style={linkStyle}>
                 Sign Up
@@ -137,14 +139,14 @@ const navigate = useNavigate();
           )}
         </div>
         <span style={iconStyle} onClick={handleToggleMenu}>
-          {menuOpen ? '✕' : '☰'}
+          {menuOpen ? "✕" : "☰"}
         </span>
       </div>
       <div style={menuStyle}>
         <Link to="/home" style={linkStyle}>
           Home
         </Link>
-        {isAuthenticated && (
+        {user && (
           <>
             <Link to="/my-items" style={linkStyle}>
               My Items
@@ -172,7 +174,7 @@ const navigate = useNavigate();
             </Link>
           </>
         )}
-        {!isAuthenticated && (
+        {!user && (
           <>
             <Link to="/sign-up" style={linkStyle}>
               Sign Up
